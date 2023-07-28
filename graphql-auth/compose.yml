@@ -1,0 +1,22 @@
+# Exercice 2
+
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+  # Exercice 3
+  server:
+    build:
+      context: .
+      dockerfile: DockerfileDev
+    volumes:
+      - .:/app
+    environment:
+      - PORT=${PORT}
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    ports:
+      - 3000:3000
